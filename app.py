@@ -24,7 +24,7 @@ def afspil_lydfil(filnavn):
 # ------------------------------------------------------------------------------
 # GÅDE 1: Musikalsk spor (The Weeknd via anonym lokal afspiller)
 # ------------------------------------------------------------------------------
-elif st.session_state.trin == 3:
+if st.session_state.trin == 1:
     st.subheader("Gåde 1: Et lysende hit")
     st.write("Afspil lyden nedenfor. Hvad er titlen på det track, du hører?")
     
@@ -62,7 +62,7 @@ elif st.session_state.trin == 2:
 # ------------------------------------------------------------------------------
 # GÅDE 3: Den Visuelle Dynamo-Udfordring (Fuld opdateret sekvens)
 # ------------------------------------------------------------------------------
-if st.session_state.trin == 1:
+elif st.session_state.trin == 3:
     st.subheader("Gåde 3: Det evige strømproblem")
     st.write("Lad os se, om du kan få gang i cyklen...")
     
