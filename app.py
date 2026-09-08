@@ -35,7 +35,7 @@ if st.session_state.trin == 1:
     if st.button("Tjek svar", key="knap3"):
         if "blinding lights" in svar3 or "blinding" in svar3:
             st.success("Ja! 'Blinding Lights' af The Weeknd!")
-            st.session_state.trin = 4
+            st.session_state.trin = 2
             st.rerun()
         else:
             st.error("Det var ikke det rigtige nummer.")
@@ -68,7 +68,7 @@ elif st.session_state.trin == 3:
     
     # Skjult Python-knap, som JavaScript "klikker på" i baggrunden, når hjulet rammer 100%
     if st.button("Skjult_Knap_Naviger", key="skjult_knap", help="Ignorer denne"):
-        st.session_state.trin = 2
+        st.session_state.trin = 4
         st.balloons()
         st.rerun()
 
@@ -247,6 +247,6 @@ elif st.session_state.trin == 4:
 # ------------------------------------------------------------------------------
 elif st.session_state.trin == 5:
     st.balloons()
-    st.snow()
+    st.image("https://giphy.com/gifs/party-the-office-hard-l0MYt5jPR6QX5pnqM", use_column_width=True)
     st.subheader("🎉 TILLYKKE! DU HAR LØST MYSTERIET! 🎉")
     st.write("Du har gættet det helt rigtigt! Værsgo' at åbne gaven")
