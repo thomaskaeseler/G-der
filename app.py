@@ -252,7 +252,7 @@ elif st.session_state.trin == 5:
         <style>
         /* Container til bølge 1 (4 store, spredte balloner) */
         body::before {
-            content: '🎈         🎉          🎈                🎉          🎈                🎉          🎈';
+            content: '🎈         🎈       🎉       🎈          🎈          🎉       🎈          🎈';
             position: fixed;
             bottom: -80px;
             left: 0;
