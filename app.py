@@ -242,4 +242,86 @@ elif st.session_state.trin == 4:
         else:
             st.error("Næsten!")
 
-https://media1.tenor.com/m/zlLpmdF0ZSEAAAAd/danse-office-space.gif
+# ------------------------------------------------------------------------------
+# AFSLØRINGEN (PERFEKT MOBIL-VERSION MED FARVEDE, HURTIGERE & SPREDTE BALLONER)
+# ------------------------------------------------------------------------------
+elif st.session_state.trin == 5:
+    # Sne-animation fra Streamlit
+    st.snow()
+    
+    # 🎈 AVANCERET FINTE: Uendelige balloner i forskellige farver, spredt ud og med højere fart
+    st.markdown(
+        """
+        <style>
+        /* Container til vores balloner */
+        body::before, body::after {
+            position: fixed;
+            bottom: -80px;
+            left: 0;
+            right: 0;
+            font-size: 45px;
+            display: flex;
+            justify-content: space-around;
+            pointer-events: none;
+            z-index: 99999;
+            white-space: nowrap;
+        }
+
+        /* Første bølge (9 sekunder i stedet for 12, og farvet med skygger/gradient-stil) */
+        body::before {
+            content: '🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈';
+            animation: hurtigeBalloner1 9s linear infinite;
+            /* Farver ballonerne skiftevis i glade farver */
+            filter: drop-shadow(15px 0 0 #FFD700) drop-shadow(30px 0 0 #1C64F2) drop-shadow(45px 0 0 #00A86B) drop-shadow(60px 0 0 #9B51E0);
+        }
+        
+        /* Anden bølge (Rykket skævt og forsinket, så de ikke flyver på en lige linje) */
+        body::after {
+            content: '🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈';
+            animation: hurtigeBalloner2 9s linear infinite;
+            animation-delay: 4.5s;
+            filter: drop-shadow(-10px -20px 0 #FF851B) drop-shadow(20px -10px 0 #F012BE) drop-shadow(40px -30px 0 #1C64F2);
+        }
+
+        /* Animation til bølge 1 (Svajer til højre) */
+        @keyframes hurtigeBalloner1 {
+            0% {
+                transform: translateY(0) translateX(-20px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% {
+                transform: translateY(-120vh) translateX(40px) rotate(15deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animation til bølge 2 (Rykket i højden og svajer til venstre så de spreder sig helt) */
+        @keyframes hurtigeBalloner2 {
+            0% {
+                transform: translateY(30px) translateX(30px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% {
+                transform: translateY(-125vh) translateX(-50px) rotate(-15deg);
+                opacity: 0;
+            }
+        }
+        </style>
+        """, 
+        unsafe_allow_html=True
+    )
+    
+    # Sørg for at hele denne linje står præcis sådan her uden overflødige links omkring:
+    st.image("https://media1.tenor.com/m/zlLpmdF0ZSEAAAAd/danse-office-space.gif", use_container_width=True)
+    
+    st.subheader("🎉 TILLYKKE! DU HAR LØST MYSTERIET! 🎉")
+    st.write("Du har gættet det helt rigtigt! Værsgo' at åbne gaven 🎁🚲✨")
+    
+    if st.button("Prøv spillet igen 🔄"):
+        st.session_state.trin = 1
+        st.rerun()
+
