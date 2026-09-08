@@ -52,7 +52,7 @@ elif st.session_state.trin == 2:
     renset_svar = svar2.replace(".", "").replace(",", "")
     
     if st.button("Tjek svar", key="knap2"):
-        if renset_svar == "der skal være lys":
+        if renset_svar == "der skal være lys" or renset_svar == "lad der være lys":
             st.success("Præcis! Og der blev lys!")
             st.session_state.trin = 3
             st.rerun()
