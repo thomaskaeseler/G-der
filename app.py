@@ -246,9 +246,6 @@ elif st.session_state.trin == 4:
 # AFSLØRINGEN (PERFEKT MOBIL-VERSION MED FARVEDE, HURTIGERE & SPREDTE BALLONER)
 # ------------------------------------------------------------------------------
 elif st.session_state.trin == 5:
-    # Sne-animation fra Streamlit
-    st.snow()
-    
     # 🎈 AVANCERET FINTE: Uendelige balloner i forskellige farver, spredt ud og med højere fart
     st.markdown(
         """
@@ -269,7 +266,7 @@ elif st.session_state.trin == 5:
 
         /* Første bølge (9 sekunder i stedet for 12, og farvet med skygger/gradient-stil) */
         body::before {
-            content: '🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈';
+            content: '🎈 🎈 🎈 🎈 ';
             animation: hurtigeBalloner1 9s linear infinite;
             /* Farver ballonerne skiftevis i glade farver */
             filter: drop-shadow(15px 0 0 #FFD700) drop-shadow(30px 0 0 #1C64F2) drop-shadow(45px 0 0 #00A86B) drop-shadow(60px 0 0 #9B51E0);
@@ -277,7 +274,7 @@ elif st.session_state.trin == 5:
         
         /* Anden bølge (Rykket skævt og forsinket, så de ikke flyver på en lige linje) */
         body::after {
-            content: '🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈';
+            content: '🎈 🎈 🎈 🎈';
             animation: hurtigeBalloner2 9s linear infinite;
             animation-delay: 4.5s;
             filter: drop-shadow(-10px -20px 0 #FF851B) drop-shadow(20px -10px 0 #F012BE) drop-shadow(40px -30px 0 #1C64F2);
