@@ -246,14 +246,32 @@ elif st.session_state.trin == 4:
 # AFSLØRINGEN (PERFEKT MOBIL-VERSION MED FARVEDE, HURTIGERE & SPREDTE BALLONER)
 # ------------------------------------------------------------------------------
 elif st.session_state.trin == 5:
-    # 🎈 AVANCERET FINTE: Uendelige balloner i forskellige farver, spredt ud og med højere fart
+# 🎈 AVANCERET CSS: Skaber uafhængige, perfekt spredte og farverige balloner
     st.markdown(
         """
         <style>
-        /* Container til vores balloner */
-        body::before, body::after {
+        /* Container til bølge 1 (4 store, spredte balloner) */
+        body::before {
+            content: '🎈         🎉          🎈                🎉          🎈                🎉          🎈';
             position: fixed;
             bottom: -80px;
+            left: 0;
+            right: 0;
+            font-size: 45px;
+            display: flex;
+            /* Justify-content: space-around sikrer maksimal og ligelig afstand over hele skærmens bredde */
+            justify-content: space-around;
+            pointer-events: none;
+            z-index: 99999;
+            white-space: nowrap;
+            animation: svajendeBalloner1 9s linear infinite;
+        }
+        
+        /* Container til bølge 2 (4 balloner, der flyver forskudt og imellem bølge 1) */
+        body::after {
+            content: '🎈                🎉          🎈                🎉          🎈                🎉          🎈';
+            position: fixed;
+            bottom: -120px; /* Starter lavere for at bryde den lige linje i højden */
             left: 0;
             right: 0;
             font-size: 45px;
@@ -262,48 +280,36 @@ elif st.session_state.trin == 5:
             pointer-events: none;
             z-index: 99999;
             white-space: nowrap;
+            animation: svajendeBalloner2 9s linear infinite;
+            animation-delay: 4.5s; /* Kommer halvvejs inde i bølge 1's cyklus */
         }
 
-        /* Første bølge (9 sekunder i stedet for 12, og farvet med skygger/gradient-stil) */
-        body::before {
-            content: '🎈 🎉 🎈 🎉 🎈 🎉 🎈 ';
-            animation: hurtigeBalloner1 9s linear infinite;
-            /* Farver ballonerne skiftevis i glade farver */
-            filter: drop-shadow(15px 0 0 #FFD700) drop-shadow(30px 0 0 #1C64F2) drop-shadow(45px 0 0 #00A86B) drop-shadow(60px 0 0 #9B51E0);
-        }
-        
-        /* Anden bølge (Rykket skævt og forsinket, så de ikke flyver på en lige linje) */
-        body::after {
-            content: '🎈 🎉 🎈 🎉 🎈 🎉 🎈';
-            animation: hurtigeBalloner2 9s linear infinite;
-            animation-delay: 4.5s;
-            filter: drop-shadow(-10px -20px 0 #FF851B) drop-shadow(20px -10px 0 #F012BE) drop-shadow(40px -30px 0 #1C64F2);
-        }
-
-        /* Animation til bølge 1 (Svajer til højre) */
-        @keyframes hurtigeBalloner1 {
+        /* Animation til bølge 1: Stiger roligt op og svajer blidt mod højre */
+        @keyframes svajendeBalloner1 {
             0% {
-                transform: translateY(0) translateX(-20px) rotate(0deg);
+                transform: translateY(0) translateX(-15px);
                 opacity: 0;
             }
-            10% { opacity: 0.9; }
-            90% { opacity: 0.9; }
+            10% { opacity: 0.85; }
+            50% { transform: translateY(-60vh) translateX(25px); } /* Svajer midtvejs */
+            90% { opacity: 0.85; }
             100% {
-                transform: translateY(-120vh) translateX(40px) rotate(15deg);
+                transform: translateY(-125vh) translateX(-15px);
                 opacity: 0;
             }
         }
 
-        /* Animation til bølge 2 (Rykket i højden og svajer til venstre så de spreder sig helt) */
-        @keyframes hurtigeBalloner2 {
+        /* Animation til bølge 2: Er forskudt i bunden og svajer den modsatte vej (mod venstre) */
+        @keyframes svajendeBalloner2 {
             0% {
-                transform: translateY(30px) translateX(30px) rotate(0deg);
+                transform: translateY(0) translateX(20px);
                 opacity: 0;
             }
-            10% { opacity: 0.9; }
-            90% { opacity: 0.9; }
+            10% { opacity: 0.85; }
+            50% { transform: translateY(-60vh) translateX(-20px); } /* Svajer modsat */
+            90% { opacity: 0.85; }
             100% {
-                transform: translateY(-125vh) translateX(-50px) rotate(-15deg);
+                transform: translateY(-125vh) translateX(20px);
                 opacity: 0;
             }
         }
