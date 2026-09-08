@@ -22,10 +22,48 @@ def afspil_lydfil(filnavn):
         st.warning(f"⚠️ Kunne ikke finde lydfilen '{filnavn}' i mappen. Husk at placere den ved siden af app.py!")
 
 # ------------------------------------------------------------------------------
-# GÅDE 1: Den Visuelle Dynamo-Udfordring (Fuld opdateret sekvens)
+# GÅDE 1: Musikalsk spor (The Weeknd via anonym lokal afspiller)
+# ------------------------------------------------------------------------------
+elif st.session_state.trin == 3:
+    st.subheader("Gåde 1: Et lysende hit")
+    st.write("Afspil lyden nedenfor. Hvad er titlen på det track, du hører?")
+    
+    afspil_lydfil("1.mp3")
+    
+    svar3 = st.text_input("Hvad hedder sangen?", key="svar3").strip().lower()
+    
+    if st.button("Tjek svar", key="knap3"):
+        if "blinding lights" in svar3 or "blinding" in svar3:
+            st.success("Ja! 'Blinding Lights' af The Weeknd!")
+            st.session_state.trin = 4
+            st.rerun()
+        else:
+            st.error("Det var ikke det rigtige nummer.")
+
+
+# ------------------------------------------------------------------------------
+# GÅDE 2: Det bibelske citat
+# ------------------------------------------------------------------------------
+elif st.session_state.trin == 2:
+    st.subheader("Gåde 2: De første ord")
+    st.write("*Hvad sagde Gud ifølge Første Mosebog kapitel 1, vers 3?*")
+    
+    svar2 = st.text_input("Skriv dit svar her:", key="svar2").strip().lower()
+    renset_svar = svar2.replace(".", "").replace(",", "")
+    
+    if st.button("Tjek svar", key="knap2"):
+        if renset_svar == "der skal være lys":
+            st.success("Præcis! Og der blev lys!")
+            st.session_state.trin = 3
+            st.rerun()
+        else:
+            st.error("Ikke helt rigtigt. Der skal være...)")
+            
+# ------------------------------------------------------------------------------
+# GÅDE 3: Den Visuelle Dynamo-Udfordring (Fuld opdateret sekvens)
 # ------------------------------------------------------------------------------
 if st.session_state.trin == 1:
-    st.subheader("Gåde 1: Det evige strømproblem")
+    st.subheader("Gåde 3: Det evige strømproblem")
     st.write("Lad os se, om du kan få gang i cyklen...")
     
     # Skjult Python-knap, som JavaScript "klikker på" i baggrunden, når hjulet rammer 100%
@@ -57,17 +95,19 @@ if st.session_state.trin == 1:
             </button>
         </div>
 
-        <!-- TRIN 3: SMID BATTERIERNE UD (MED NY DRAG & DROP LOGIK) -->
-        <div id="trin3_batteri" style="display: none;">
+         <!-- TRIN 3: SMID BATTERIERNE UD (MED MOBIL-TOUCH LOGIK) -->
+        <div id="trin3_batteri" style="display: none; height: 180px; position: relative;">
             <p><strong>Ingen lys... Cykellygterne er helt døde!</strong></p>
-            <p>Batterierne er selvfølgelig løbet tør for strøm igen, igen. Ud med det skrammel!</p>
-            <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0;">
-                <!-- Batteri som kan trækkes -->
-                <div id="battery" draggable="true" ondragstart="drag(event)" onclick="smidBatteriUd()" style="font-size: 50px; cursor: grab; touch-action: none; user-select: none;">🔋</div>
-                <!-- Skraldespand som modtager -->
-                <div id="trash" ondrop="drop(event)" ondragover="allowDrop(event)" style="font-size: 60px; padding: 10px; border: 3px dashed #ff4b4b; border-radius: 10px; width: 80px; height: 80px; display:flex; justify-content:center; align-items:center;">🗑️</div>
+            <p>Batterierne er løbet tør. Ud med det skrammel!</p>
+            <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0; position: relative; height: 90px;">
+                <!-- Batteri med touch-action none for at forhindre at skærmen scroller når man trækker -->
+                <div id="battery" draggable="true" ondragstart="drag(event)" onclick="smidBatteriUd()" 
+                     style="font-size: 50px; cursor: grab; touch-action: none; user-select: none; position: absolute; left: 20%; z-index: 10;">🔋</div>
+                <!-- Skraldespand -->
+                <div id="trash" ondrop="drop(event)" ondragover="allowDrop(event)" 
+                     style="font-size: 60px; padding: 10px; border: 3px dashed #ff4b4b; border-radius: 10px; width: 80px; height: 80px; display:flex; justify-content:center; align-items:center; position: absolute; right: 20%;">🗑️</div>
             </div>
-            <p style="font-size: 12px; color: #555;">(Træk fysisk batteriet over i spanden, eller klik på det!)</p>
+            <p style="font-size: 12px; color: #555; margin-top: 10px;"></p>
         </div>
         
         <!-- TRIN 4: LED EFTER OPLADEREN -->
@@ -178,42 +218,6 @@ if st.session_state.trin == 1:
     
     components.html(visuelt_spil_html, height=400)
             
-# ------------------------------------------------------------------------------
-# GÅDE 2: Det bibelske citat
-# ------------------------------------------------------------------------------
-elif st.session_state.trin == 2:
-    st.subheader("Gåde 2: De første ord")
-    st.write("*Hvad sagde Gud ifølge Første Mosebog kapitel 1, vers 3?*")
-    
-    svar2 = st.text_input("Skriv dit svar her:", key="svar2").strip().lower()
-    renset_svar = svar2.replace(".", "").replace(",", "")
-    
-    if st.button("Tjek svar", key="knap2"):
-        if renset_svar == "der skal være lys":
-            st.success("Præcis! Og der blev lys!")
-            st.session_state.trin = 3
-            st.rerun()
-        else:
-            st.error("Ikke helt rigtigt. Der skal være...)")
-
-# ------------------------------------------------------------------------------
-# GÅDE 3: Musikalsk spor (The Weeknd via anonym lokal afspiller)
-# ------------------------------------------------------------------------------
-elif st.session_state.trin == 3:
-    st.subheader("Gåde 3: Et lysende hit")
-    st.write("Afspil lyden nedenfor. Hvad er titlen på det track, du hører?")
-    
-    afspil_lydfil("1.mp3")
-    
-    svar3 = st.text_input("Hvad hedder sangen?", key="svar3").strip().lower()
-    
-    if st.button("Tjek svar", key="knap3"):
-        if "blinding lights" in svar3 or "blinding" in svar3:
-            st.success("Ja! 'Blinding Lights' af The Weeknd!")
-            st.session_state.trin = 4
-            st.rerun()
-        else:
-            st.error("Det var ikke det rigtige nummer.")
 
 # ------------------------------------------------------------------------------
 # GÅDE 4: Kontrasten (Rocks vs. Rav via lokale lydafspillere)
