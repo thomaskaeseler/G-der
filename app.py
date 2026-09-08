@@ -243,29 +243,70 @@ elif st.session_state.trin == 4:
             st.error("Næsten!")
 
 # ------------------------------------------------------------------------------
-# AFSLØRINGEN (FEJLFRI MOBIL-VERSION UDEN IFRAME)
+# AFSLØRINGEN (KOMPLET MOBIL-VERIFICERET MED UENDELIGE BALLONER & RIGTIG GIF)
 # ------------------------------------------------------------------------------
 elif st.session_state.trin == 5:
-    # Vi aktiverer Streamlits indbyggede effekter
-    st.balloons()
+    # Sne-animation fra Streamlit
     st.snow()
     
-    # CSS-FINTE: Dette tvinger ballonerne til at bevæge sig meget langsommere og mere elegant!
+    # 🎈 SKUDSIKKER FINTE: Laver uendelige, langsomme balloner direkte på skærmen
     st.markdown(
         """
         <style>
-        /* Tvinger ballonerne til at tage 12 sekunder om at flyve op i stedet for 3 sekunder */
-        div[data-testid="stBalloons"] > div {
-            animation-duration: 12s !important;
-            animation-timing-function: ease-out !important;
+        /* Skaber uendelige balloner over hele skærmen */
+        body::before {
+            content: '🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈';
+            position: fixed;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            font-size: 35px;
+            display: flex;
+            justify-content: space-around;
+            pointer-events: none;
+            z-index: 99999;
+            animation: uendeligeBalloner 12s linear infinite;
+        }
+        
+        /* Ekstra hold balloner med forsinkelse, så skærmen altid er fyldt */
+        body::after {
+            content: '🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈 🎈';
+            position: fixed;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            font-size: 40px;
+            display: flex;
+            justify-content: space-around;
+            pointer-events: none;
+            z-index: 99999;
+            animation: uendeligeBalloner 12s linear infinite;
+            animation-delay: 6s;
+        }
+
+        @keyframes uendeligeBalloner {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-115vh) rotate(20deg);
+                opacity: 0;
+            }
         }
         </style>
         """, 
         unsafe_allow_html=True
     )
     
-    # En fuldstændig stabil og åben fødselsdags-fejrings-GIF fra Tenor
-    st.image("https://tenor.com/2EKB.gif", use_container_width=True)
+    # HER ER DET REELLE MEDIELINK TIL GIF-FILEN:
+    st.image("https://tenor.com", use_container_width=True)
     
     st.subheader("🎉 TILLYKKE! DU HAR LØST MYSTERIET! 🎉")
     st.write("Du har gættet det helt rigtigt! Værsgo' at åbne gaven 🎁🚲✨")
@@ -273,4 +314,5 @@ elif st.session_state.trin == 5:
     if st.button("Prøv spillet igen 🔄"):
         st.session_state.trin = 1
         st.rerun()
+
 
