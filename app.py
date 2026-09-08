@@ -247,6 +247,6 @@ elif st.session_state.trin == 4:
 # ------------------------------------------------------------------------------
 elif st.session_state.trin == 5:
     st.balloons()
-    st.image("https://giphy.com/gifs/party-the-office-hard-l0MYt5jPR6QX5pnqM", use_column_width=True)
+    st.image("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnE4MXJpdzdrbHdnNmI0d3RiZ3NyczQwdHh4eHc1NnV2cWE5NWlxMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYt5jPR6QX5pnqM/giphy.gif", use_column_width=True)
     st.subheader("🎉 TILLYKKE! DU HAR LØST MYSTERIET! 🎉")
     st.write("Du har gættet det helt rigtigt! Værsgo' at åbne gaven")
