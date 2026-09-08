@@ -246,7 +246,65 @@ elif st.session_state.trin == 4:
 # AFSLØRINGEN
 # ------------------------------------------------------------------------------
 elif st.session_state.trin == 5:
-    st.balloons()
-    st.image("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnE4MXJpdzdrbHdnNmI0d3RiZ3NyczQwdHh4eHc1NnV2cWE5NWlxMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0MYt5jPR6QX5pnqM/giphy.gif", use_column_width=True)
+    # Gigantisk strøm af langsomme, svævende balloner via HTML/JS
+    langsomme_balloner_html = """
+    <div id="balloon-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; overflow: hidden;"></div>
+    
+    <script>
+        function createBalloon() {
+            const container = document.getElementById('balloon-container');
+            if (!container) return;
+            
+            const balloon = document.createElement('div');
+            
+            // Tilfældige glade fødselsdagsfarver
+            const colors = ['#FF4B4B', '#FFD700', '#1C64F2', '#00A86B', '#9B51E0', '#FF851B', '#F012BE'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Design af ballonen
+            balloon.style.position = 'absolute';
+            balloon.style.bottom = '-100px';
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.width = (Math.random() * 20 + 30) + 'px'; // Varierende størrelser
+            balloon.style.height = (parseFloat(balloon.style.width) * 1.2) + 'px';
+            balloon.style.background = randomColor;
+            balloon.style.borderRadius = '50% 50% 50% 50% / 40% 40% 60% 60%';
+            
+            // Gør animationen dejlig langsom (mellem 8 og 14 sekunder om at stige op)
+            const duration = Math.random() * 6 + 8; 
+            balloon.style.transition = `transform ${duration}s linear, opacity ${duration}s ease-out`;
+            
+            container.appendChild(balloon);
+            
+            // Start animationen (stiger op og roterer en smule)
+            setTimeout(() => {
+                const randomX = (Math.random() * 200 - 100) + 'px';
+                balloon.style.transform = `translate(${randomX}, -120vh) rotate(${Math.random() * 40 - 20}deg)`;
+            }, 50);
+            
+            // Slet ballonen når den er fløjet væk
+            setTimeout(() => {
+                balloon.remove();
+            }, duration * 1000);
+        }
+        
+        // Lav MANGE balloner hurtigt efter hinanden i starten
+        for(let i = 0; i < 40; i++) {
+            setTimeout(createBalloon, Math.random() * 3000);
+        }
+        
+        // Bliv ved med at lave nye balloner løbende
+        setInterval(createBalloon, 200);
+    </script>
+    """
+    # Kør ballon-animationen i baggrunden
+    components.html(langsomme_balloner_html, height=0)
+    
+    # Vis din The Office GIF og teksten under ballon-regnen
+    st.image("https://giphy.com", use_container_width=True)
     st.subheader("🎉 TILLYKKE! DU HAR LØST MYSTERIET! 🎉")
-    st.write("Du har gættet det helt rigtigt! Værsgo' at åbne gaven")
+    st.write("Du har gættet det helt rigtigt! Værsgo' at åbne gaven 🎁🚲✨")
+    
+    if st.button("Prøv spillet igen 🔄"):
+        st.session_state.trin = 1
+        st.rerun()
